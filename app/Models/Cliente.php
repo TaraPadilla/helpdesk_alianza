@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModeloAdquirido;
+use App\Models\Ciudad;
 
 class Cliente extends Model
 {
@@ -14,8 +15,7 @@ class Cliente extends Model
         'categoria',
         'telefono',
         'direccion',
-        'ciudad',
-        'provincia'
+        'ciudad_id'
     ];
 
     protected $casts = [
@@ -25,5 +25,10 @@ class Cliente extends Model
     public function modelosAdquiridos()
     {
         return $this->hasMany(ModeloAdquirido::class);
+    }
+
+    public function ciudad()
+    {
+        return $this->belongsTo(Ciudad::class);
     }
 }

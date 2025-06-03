@@ -6,6 +6,10 @@ use App\Http\Controllers\LineaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\OrigenController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ModeloAdquiridoController;
+use App\Http\Controllers\CiudadController;
+
 
 
 Route::get('/conexion-test', function () {
@@ -41,5 +45,14 @@ Route::prefix('catalogo')->group(function () {
     Route::resource('origenes', OrigenController::class)->parameters([
         'origenes' => 'origen'
     ]);
-    
+});
+
+// Gestion Clientes Routes
+Route::prefix('gestion')->group(function () {
+    Route::resource('clientes', ClienteController::class);
+    Route::resource('modelos-adquiridos', ModeloAdquiridoController::class);
+    Route::get('ciudades/provincia/{provincia}', [CiudadController::class, 'ciudadesPorProvincia']);
+    Route::resource('ciudades', CiudadController::class)->parameters([
+        'ciudades' => 'ciudad'
+    ]);
 });
