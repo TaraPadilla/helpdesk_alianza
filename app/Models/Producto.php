@@ -18,7 +18,7 @@ class Producto extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function linea()
+    public function lineaRel()
     {
         return $this->belongsTo(Linea::class);
     }
