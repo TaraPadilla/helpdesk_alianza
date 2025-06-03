@@ -10,7 +10,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return ProductoResource::collection(Producto::with('lineaRel')->get());
+        return ProductoResource::collection(Producto::with('linea')->get());
     }
 
     public function store(Request $request)
@@ -21,12 +21,12 @@ class ProductoController extends Controller
         ]);
 
         $producto = Producto::create($validated);
-        return new ProductoResource($producto->load('lineaRel'));
+        return new ProductoResource($producto->load('linea'));
     }
 
     public function show(Producto $producto)
     {
-        return new ProductoResource($producto->load('lineaRel'));
+        return new ProductoResource($producto->load('linea'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -37,7 +37,7 @@ class ProductoController extends Controller
         ]);
 
         $producto->update($validated);
-        return new ProductoResource($producto->load('lineaRel'));
+        return new ProductoResource($producto->load('linea'));
     }
 
     public function destroy(Producto $producto)
