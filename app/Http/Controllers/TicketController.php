@@ -14,7 +14,7 @@ class TicketController extends Controller
     public function index()
     {
         return TicketResource::collection(
-            Ticket::with('modeloAdquirido.modelo')
+            Ticket::with('modeloAdquirido.modelo.producto.linea','modeloAdquirido.cliente')
             ->get());
     }
 
