@@ -9,6 +9,8 @@ use App\Http\Controllers\OrigenController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ModeloAdquiridoController;
 use App\Http\Controllers\CiudadController;
+use App\Http\Controllers\TicketController;
+
 
 
 
@@ -32,16 +34,11 @@ Route::get('/', function () {
 
 // Product Catalog Routes
 Route::prefix('catalogo')->group(function () {
-    // Lineas
-    Route::resource('lineas', LineaController::class);
-    
-    // Productos
+    Route::resource('lineas', LineaController::class);  
+    Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);  
     Route::resource('productos', ProductoController::class);
-    
-    // Modelos
+    Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
     Route::resource('modelos', ModeloController::class);
-    
-    // Origenes
     Route::resource('origenes', OrigenController::class)->parameters([
         'origenes' => 'origen'
     ]);
@@ -51,10 +48,18 @@ Route::prefix('catalogo')->group(function () {
 Route::prefix('gestion')->group(function () {
     Route::get('clientes/categorias', [ClienteController::class, 'getCategorias']);
     Route::resource('clientes', ClienteController::class);
-    Route::resource('modelos-adquiridos', ModeloAdquiridoController::class);
     Route::get('ciudades/provincia/{provincia}', [CiudadController::class, 'ciudadesPorProvincia']);
     Route::resource('ciudades', CiudadController::class)->parameters([
         'ciudades' => 'ciudad'
-    ]);
-    
+    ]);   
 });
+
+// Tickets Routes
+Route::prefix('helpdesk')->group(function () {
+    Route::resource('tickets', TicketController::class);
+    Route::resource('modelos-adquiridos', ModeloAdquiridoController::class)
+    ->parameters([
+        'modelos-adquiridos' => 'modeloAdquirido'
+    ]);
+});
+

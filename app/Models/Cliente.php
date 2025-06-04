@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModeloAdquirido;
 use App\Models\Ciudad;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
+    use SoftDeletes;
     protected $table = 'clientes';
     protected $fillable = [
         'nombre',

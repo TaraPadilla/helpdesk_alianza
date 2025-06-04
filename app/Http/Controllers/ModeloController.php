@@ -47,4 +47,9 @@ class ModeloController extends Controller
         $modelo->delete();
         return response()->noContent();
     }
+
+    public function filterByProducto($producto)
+    {
+        return ModeloResource::collection(Modelo::with(['producto', 'origen'])->where('producto_id', $producto)->get());
+    }
 }
