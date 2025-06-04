@@ -18,15 +18,16 @@ class ClienteResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nombre_completo' => $this->nombre . ' ' . $this->apellido,
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
             'categoria' => $this->categoria,
-            'contacto' => [
-                'telefono' => $this->telefono,
-                'direccion' => $this->direccion,
-                'ciudad' => $this->whenLoaded('ciudad', function () {
-                    return new CiudadResource($this->ciudad);
-                })
-            ],
+            'documento' => $this->documento,
+            'telefono' => $this->telefono,
+            'direccion' => $this->direccion,
+            'email' => $this->email,
+            'ciudad' => $this->whenLoaded('ciudad', function () {
+                return new CiudadResource($this->ciudad);
+            }),
             'modelos_adquiridos' => ModeloAdquiridoResource::collection($this->whenLoaded('modelosAdquiridos')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

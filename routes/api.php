@@ -49,10 +49,12 @@ Route::prefix('catalogo')->group(function () {
 
 // Gestion Clientes Routes
 Route::prefix('gestion')->group(function () {
+    Route::get('clientes/categorias', [ClienteController::class, 'getCategorias']);
     Route::resource('clientes', ClienteController::class);
     Route::resource('modelos-adquiridos', ModeloAdquiridoController::class);
     Route::get('ciudades/provincia/{provincia}', [CiudadController::class, 'ciudadesPorProvincia']);
     Route::resource('ciudades', CiudadController::class)->parameters([
         'ciudades' => 'ciudad'
     ]);
+    
 });

@@ -11,15 +11,19 @@ class Cliente extends Model
     protected $table = 'clientes';
     protected $fillable = [
         'nombre',
+        'documento',
         'apellido',
         'categoria',
         'telefono',
         'direccion',
-        'ciudad_id'
+        'email',
+        'ciudad_id',
+        'documento'
     ];
-
+    
     protected $casts = [
         'deleted_at' => 'datetime',
+        'documento' => 'integer'
     ];
 
     public function modelosAdquiridos()
