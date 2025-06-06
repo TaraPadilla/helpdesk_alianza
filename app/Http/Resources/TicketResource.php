@@ -22,9 +22,13 @@ class TicketResource extends JsonResource
                 'modelo' => [
                     'id' => $this->modeloAdquirido->modelo->id,
                     'nombre' => $this->modeloAdquirido->modelo->nombre,
-                    'linea' => [
-                        'id' => $this->modeloAdquirido->modelo->producto->linea->id,
-                        'nombre' => $this->modeloAdquirido->modelo->producto->linea->nombre
+                    'producto' => [
+                        'id' => $this->modeloAdquirido->modelo->producto->id,
+                        'nombre' => $this->modeloAdquirido->modelo->producto->nombre,
+                        'linea' => [
+                            'id' => $this->modeloAdquirido->modelo->producto->linea->id,
+                            'nombre' => $this->modeloAdquirido->modelo->producto->linea->nombre
+                        ]
                     ]
                 ],
                 'cliente' => [
