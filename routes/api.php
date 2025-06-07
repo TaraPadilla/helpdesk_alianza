@@ -10,8 +10,8 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ModeloAdquiridoController;
 use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\TicketController;
-
-
+use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\TallerController;
 
 
 Route::get('/conexion-test', function () {
@@ -62,4 +62,13 @@ Route::prefix('helpdesk')->group(function () {
         'modelos-adquiridos' => 'modeloAdquirido'
     ]);
 });
+
+// Técnicos Routes
+Route::prefix('tecnico')->group(function () {
+    Route::resource('talleres', TallerController::class)->parameters([
+        'talleres' => 'taller'
+    ]);
+    Route::resource('tecnicos', TecnicoController::class);
+});
+
 
