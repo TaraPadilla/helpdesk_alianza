@@ -10,6 +10,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ModeloAdquiridoController;
 use App\Http\Controllers\CiudadController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\SoporteController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\TallerController;
 
@@ -69,6 +70,7 @@ Route::prefix('tecnico')->group(function () {
         'talleres' => 'taller'
     ]);
     Route::resource('tecnicos', TecnicoController::class);
+    Route::resource('soportes', SoporteController::class);
 });
 
 

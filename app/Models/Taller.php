@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Tecnico;
 use App\Models\Ciudad;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Taller extends Model
 {
+    use SoftDeletes;
     protected $table = 'talleres';
     protected $fillable = [
         'nombre',
