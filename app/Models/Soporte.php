@@ -48,4 +48,9 @@ class Soporte extends Model
     {
         return $this->belongsTo(Tecnico::class);
     }
+
+    public function repuestosUsados()
+    {
+        return $this->hasMany(RepuestosUsados::class);
+    }
 }

@@ -13,6 +13,8 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\SoporteController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\TallerController;
+use App\Http\Controllers\RepuestoController;
+use App\Http\Controllers\RepuestosUsadosController;
 
 Route::get('/conexion-test', function () {
     try {
@@ -71,4 +73,19 @@ Route::prefix('tecnico')->group(function () {
     Route::resource('tecnicos', TecnicoController::class);
     Route::resource('soportes', SoporteController::class);
     Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
+});
+
+// Repuestos Routes
+Route::prefix('repuestos')->group(function () {
+    Route::get('buscar', [RepuestoController::class, 'filterByName'])->name('repuestos.buscar');
+    Route::resource('repuestos', RepuestoController::class);
+});
+
+// RepuestosUsados Routes
+Route::prefix('repuestos-usados')->group(function () {
+    Route::get('soporte/{soporte}', [RepuestosUsadosController::class, 'repuestosUsadosPorSoporte'])
+        ->name('repuestos-usados.soporte');
+    Route::get('repuesto/{repuesto}', [RepuestosUsadosController::class, 'repuestosUsadosPorRepuesto'])
+        ->name('repuestos-usados.repuesto');
+    Route::resource('repuestos-usados', RepuestosUsadosController::class);
 });
