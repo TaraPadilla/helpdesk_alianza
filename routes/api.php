@@ -16,6 +16,7 @@ use App\Http\Controllers\TallerController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\RepuestosUsadosController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\EncuestaController;
 
 Route::get('/conexion-test', function () {
     try {
@@ -89,6 +90,17 @@ Route::prefix('repuestos-usados')->group(function () {
     Route::get('repuesto/{repuesto}', [RepuestosUsadosController::class, 'repuestosUsadosPorRepuesto'])
         ->name('repuestos-usados.repuesto');
     Route::resource('repuestos-usados', RepuestosUsadosController::class);
+});
+
+Route::resource('encuestas', EncuestaController::class);
+
+// Encuestas Routes
+Route::prefix('encuestas')->group(function () {
+    Route::get('ticket/{ticket}', [EncuestaController::class, 'encuestasPorTicket'])
+        ->name('encuestas.ticket');
+    Route::get('fecha', [EncuestaController::class, 'encuestasPorFecha'])
+        ->name('encuestas.fecha');
+
 });
 
 // Pagos Routes

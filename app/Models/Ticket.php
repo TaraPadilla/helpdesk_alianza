@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ModeloAdquirido;
 use App\Models\Soporte;
 use App\Models\Pago;
+use App\Models\Encuesta;
 
 class Ticket extends Model
 {
@@ -43,5 +44,10 @@ class Ticket extends Model
     public function pagos()
     {
         return $this->hasMany(Pago::class);
+    }
+
+    public function encuestas()
+    {
+        return $this->hasMany(Encuesta::class);
     }
 }
