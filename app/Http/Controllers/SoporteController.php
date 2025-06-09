@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Soporte;
 use App\Http\Resources\SoporteResource;
+use App\Models\Ticket;
+use App\Models\Tecnico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -72,13 +74,14 @@ class SoporteController extends Controller
         return response()->noContent();
     }
 
-    public function soportesPorTicket(Ticket $ticket)
+    //Soporte por ID de ticket
+    public function soportePorTicket(Ticket $ticket)
     {
         return SoporteResource::collection($ticket->soportes()->get());
     }
 
-    public function soportesPorTecnico(Tecnico $tecnico)
+    public function soportesPorTecnico($id)
     {
-        return SoporteResource::collection($tecnico->soportes()->get());
+        return SoporteResource::collection(Tecnico::find($id)->soportes()->get());
     }
 }

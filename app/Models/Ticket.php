@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModeloAdquirido;
+use App\Models\Soporte;
 
 class Ticket extends Model
 {
@@ -31,5 +32,10 @@ class Ticket extends Model
     public function modeloAdquirido()
     {
         return $this->belongsTo(ModeloAdquirido::class);
+    }
+
+    public function soportes()
+    {
+        return $this->hasMany(Soporte::class);
     }
 }

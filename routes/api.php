@@ -14,7 +14,6 @@ use App\Http\Controllers\SoporteController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\TallerController;
 
-
 Route::get('/conexion-test', function () {
     try {
         DB::connection()->getPdo();
@@ -71,6 +70,5 @@ Route::prefix('tecnico')->group(function () {
     ]);
     Route::resource('tecnicos', TecnicoController::class);
     Route::resource('soportes', SoporteController::class);
+    Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
 });
-
-

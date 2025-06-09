@@ -22,10 +22,7 @@ class SoporteResource extends JsonResource
             'descripcion_dano' => $this->descripcion_dano,
             'descripcion_reparacion' => $this->descripcion_reparacion,
             'parte_afectada' => $this->parte_afectada,
-            'orden_trabajo' => $this->orden_trabajo,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
+            'orden_trabajo' => $this->orden_trabajo
         ];
     }
 }
