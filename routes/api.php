@@ -15,6 +15,7 @@ use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\TallerController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\RepuestosUsadosController;
+use App\Http\Controllers\PagoController;
 
 Route::get('/conexion-test', function () {
     try {
@@ -88,4 +89,13 @@ Route::prefix('repuestos-usados')->group(function () {
     Route::get('repuesto/{repuesto}', [RepuestosUsadosController::class, 'repuestosUsadosPorRepuesto'])
         ->name('repuestos-usados.repuesto');
     Route::resource('repuestos-usados', RepuestosUsadosController::class);
+});
+
+// Pagos Routes
+Route::prefix('pagos')->group(function () {
+    Route::resource('pagos', PagoController::class);
+    Route::get('pagos/ticket/{ticket}', [PagoController::class, 'pagosPorTicket'])
+        ->name('pagos.ticket');
+    Route::get('pagos/status/{status}', [PagoController::class, 'pagosPorStatus'])
+        ->name('pagos.status');
 });

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ModeloAdquirido;
 use App\Models\Soporte;
+use App\Models\Pago;
 
 class Ticket extends Model
 {
@@ -37,5 +38,10 @@ class Ticket extends Model
     public function soportes()
     {
         return $this->hasMany(Soporte::class);
+    }
+
+    public function pagos()
+    {
+        return $this->hasMany(Pago::class);
     }
 }
