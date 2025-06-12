@@ -15,7 +15,9 @@ class TicketController extends Controller
     {
         return TicketResource::collection(
             Ticket::with('modeloAdquirido.modelo.producto.linea','modeloAdquirido.cliente')
-            ->get());
+            ->orderBy('id', 'desc')
+            ->get()
+        );
     }
 
     public function store(Request $request)
