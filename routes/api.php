@@ -61,7 +61,8 @@ Route::prefix('gestion')->group(function () {
 
 // Tickets Routes
 Route::prefix('helpdesk')->group(function () {
-    Route::resource('tickets', TicketController::class);
+    Route::get('/tickets/{ticket}/pdf', [TicketController::class, 'generarPDF']);
+    Route::resource('tickets', TicketController::class);    
     Route::resource('modelos-adquiridos', ModeloAdquiridoController::class)
     ->parameters([
         'modelos-adquiridos' => 'modeloAdquirido'

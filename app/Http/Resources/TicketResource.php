@@ -3,6 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ModeloAdquiridoResource;
+use App\Http\Resources\SoporteResource;
+use App\Http\Resources\PagoResource;
+use App\Http\Resources\EncuestaResource;
+
 
 class TicketResource extends JsonResource
 {
@@ -53,6 +58,9 @@ class TicketResource extends JsonResource
             'numero_nota_credito' => $this->numero_nota_credito,
             'nueva_factura' => $this->nueva_factura,
             'fecha_cierre' => $this->fecha_cierre,
+            'soportes' => SoporteResource::collection($this->soportes),
+            'pagos' => PagoResource::collection($this->pagos),
+            'encuestas' => EncuestaResource::collection($this->encuestas),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
