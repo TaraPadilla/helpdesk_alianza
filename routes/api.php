@@ -79,6 +79,9 @@ Route::prefix('tecnico')->group(function () {
     Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
 });
 
+// Usuarios API Resource
+Route::apiResource('usuarios', UsuarioController::class);
+
 // Repuestos Routes
 Route::prefix('repuestos')->group(function () {
     Route::get('buscar', [RepuestoController::class, 'filterByName'])->name('repuestos.buscar');
