@@ -43,22 +43,24 @@ Route::get('/', function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('perfil', function (Request $request) {
-        return $request->user();
+        return response()->json([
+            'data' => $request->user()
+        ]);    
     });
 
     Route::apiResource('usuarios', UsuarioController::class);
 
     // Product Catalog Routes
-Route::prefix('catalogo')->group(function () {
-    Route::resource('lineas', LineaController::class);  
-    Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);  
-    Route::resource('productos', ProductoController::class);
-    Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
-    Route::resource('modelos', ModeloController::class);
-    Route::resource('origenes', OrigenController::class)->parameters([
-        'origenes' => 'origen'
-    ]);
-});
+    Route::prefix('catalogo')->group(function () {
+        Route::resource('lineas', LineaController::class);  
+        Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);  
+        Route::resource('productos', ProductoController::class);
+        Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
+        Route::resource('modelos', ModeloController::class);
+        Route::resource('origenes', OrigenController::class)->parameters([
+            'origenes' => 'origen'
+        ]);
+    });
 });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');

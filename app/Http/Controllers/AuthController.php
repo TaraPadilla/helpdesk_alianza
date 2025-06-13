@@ -26,8 +26,10 @@ class AuthController extends Controller
         $token = $usuario->createToken('token-login')->plainTextToken;
     
         return response()->json([
-            'usuario' => $usuario,
-            'token' => $token
+            'data' => [
+                'usuario' => $usuario,
+                'token' => $token
+            ]
         ]);
     }
 
@@ -39,6 +41,8 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return new UsuarioResource($request->user());
+        return response()->json([
+            'data' => new UsuarioResource($request->user())
+        ]);
     }
 }

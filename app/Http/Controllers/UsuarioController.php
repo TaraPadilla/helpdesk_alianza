@@ -11,7 +11,9 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        return UsuarioResource::collection(Usuario::all());
+        return response()->json([
+            'data' => UsuarioResource::collection(Usuario::all())
+        ]);
     }
 
     public function store(Request $request)
