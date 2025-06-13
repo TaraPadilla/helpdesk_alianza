@@ -118,5 +118,6 @@ Route::prefix('pagos')->group(function () {
 Route::post('/imagenes-ticket', [ImagenTicketController::class, 'store']);
 Route::get('/imagenes-ticket', [ImagenTicketController::class, 'index']);
 Route::get('/imagenes-ticket/{ticket_id}', [ImagenTicketController::class, 'indexTicket']);
+Route::delete('/imagenes-ticket/{imagenTicket}', [ImagenTicketController::class, 'destroy']);
 
 

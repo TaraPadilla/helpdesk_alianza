@@ -56,13 +56,15 @@ class TicketController extends Controller
     }
 
     public function update(Request $request, Ticket $ticket)
-    {
+    {   
+        try {
+        Log::info('update Ticket', ['ticket' => $ticket]);
         $validated = $request->validate([
             'modelo_adquirido_id' => 'sometimes|required|exists:modelos_adquiridos,id',
             'fecha_reporte' => 'sometimes|required|date',
             'status' => 'sometimes|required|string',
             'resultado' => 'nullable|string',
-            'danio_reportado_cliente' => 'sometimes|required|string',
+            'danio_reportado_cliente' => 'nullable|string',
             'almacen' => 'nullable|string',
             'observaciones' => 'nullable|string',
             'motivo_no_reparado' => 'nullable|string',
@@ -70,15 +72,31 @@ class TicketController extends Controller
             'nueva_factura' => 'nullable|string',
             'fecha_cierre' => 'nullable|date',
         ]);
-
+        Log::info('update Ticket', ['validated' => $validated]);
         $ticket->update($validated);
+        Log::info('update done Ticket', ['ticket' => $ticket]);
         return new TicketResource($ticket->load('modeloAdquirido.modelo'));
+        } catch (\Throwable $e) {
+            Log::error('Error en update Ticket', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Error al actualizar'], 500);
+        }
     }
 
     public function destroy(Ticket $ticket)
     {
-        $ticket->delete();
-        return response()->noContent();
+        try {
+            $ticket->delete();
+            return response()->noContent();
+        } catch (\Throwable $e) {
+            Log::error('Error en destroy Ticket', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Error al eliminar'], 500);
+        }
     }
 
     public function ticketsPorModeloAdquirido(ModeloAdquirido $modeloAdquirido)

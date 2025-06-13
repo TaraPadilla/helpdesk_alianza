@@ -77,11 +77,17 @@ class ImagenTicketController extends Controller
     public function destroy($id)
     {
         $imagen = ImagenTicket::findOrFail($id);
+
+        // Extraer ruta interna en storage
         $ruta = str_replace('/storage/', 'public/', $imagen->ruta);
+        
         if (Storage::exists($ruta)) {
-            Storage::delete($ruta);
+            $nombreArchivo = basename($ruta); // mantiene el nombre exacto
+            Storage::move($ruta, 'public/eliminadas/' . $nombreArchivo);
         }
+        
         $imagen->delete();
+        
         return response()->json(['message' => 'Imagen eliminada correctamente']);
     }
 }
