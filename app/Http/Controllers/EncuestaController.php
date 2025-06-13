@@ -13,8 +13,10 @@ class EncuestaController extends Controller
     public function index()
     {
         return EncuestaResource::collection(
-            Encuesta::with(['ticket'])
-                ->get()
+            Encuesta::with([
+                'ticket.modeloAdquirido.cliente',
+                'ticket.modeloAdquirido.modelo'
+            ])->get()
         );
     }
 
@@ -48,7 +50,10 @@ class EncuestaController extends Controller
 
     public function show(Encuesta $encuesta)
     {
-        return new EncuestaResource($encuesta->loadMissing(['ticket']));
+        return new EncuestaResource($encuesta->loadMissing([
+            'ticket.modeloAdquirido.cliente',
+            'ticket.modeloAdquirido.modelo'
+        ]));
     }
 
     public function update(Request $request, Encuesta $encuesta)
@@ -86,7 +91,10 @@ class EncuestaController extends Controller
     public function encuestasPorTicket(Ticket $ticket)
     {
         return EncuestaResource::collection(
-            $ticket->encuestas()->get()
+            $ticket->encuestas()->with([
+                'ticket.modeloAdquirido.cliente',
+                'ticket.modeloAdquirido.modelo'
+            ])->get()
         );
     }
 

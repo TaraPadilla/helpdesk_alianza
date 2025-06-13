@@ -21,7 +21,29 @@ class EncuestaResource extends JsonResource
             'soporte_tecnico' => $this->soporte_tecnico,
             'comentario_soporte_tecnico' => $this->comentario_soporte_tecnico,
             'experiencia_compra' => $this->experiencia_compra,
-            'comentario_experiencia_compra' => $this->comentario_experiencia_compra
+            'comentario_experiencia_compra' => $this->comentario_experiencia_compra,
+            'ticket' => $this->whenLoaded('ticket', function () {
+                return [
+                    'id' => $this->ticket->id,
+                    'modelo_adquirido' => $this->ticket->modeloAdquirido ? [
+                        'id' => $this->ticket->modeloAdquirido->id,
+                        'numero_serie' => $this->ticket->modeloAdquirido->numero_serie,
+                        'fecha_compra' => $this->ticket->modeloAdquirido->fecha_compra,
+                        'numero_factura' => $this->ticket->modeloAdquirido->numero_factura,
+                        'cliente' => $this->ticket->modeloAdquirido->cliente ? [
+                            'id' => $this->ticket->modeloAdquirido->cliente->id,
+                            'nombre' => $this->ticket->modeloAdquirido->cliente->nombre,
+                            'apellido' => $this->ticket->modeloAdquirido->cliente->apellido,
+                            'email' => $this->ticket->modeloAdquirido->cliente->email,
+                            'telefono' => $this->ticket->modeloAdquirido->cliente->telefono
+                        ] : null,
+                        'modelo' => $this->ticket->modeloAdquirido->modelo ? [
+                            'id' => $this->ticket->modeloAdquirido->modelo->id,
+                            'nombre' => $this->ticket->modeloAdquirido->modelo->nombre
+                        ] : null
+                    ] : null
+                ];
+            })
         ];
     }
 }
