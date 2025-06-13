@@ -17,6 +17,7 @@ use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\RepuestosUsadosController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EncuestaController;
+use App\Http\Controllers\ImagenTicketController;
 
 Route::get('/conexion-test', function () {
     try {
@@ -111,3 +112,11 @@ Route::prefix('pagos')->group(function () {
     Route::get('pagos/status/{status}', [PagoController::class, 'pagosPorStatus'])
         ->name('pagos.status');
 });
+
+// Imagenes Routes
+
+Route::post('/imagenes-ticket', [ImagenTicketController::class, 'store']);
+Route::get('/imagenes-ticket', [ImagenTicketController::class, 'index']);
+Route::get('/imagenes-ticket/{ticket_id}', [ImagenTicketController::class, 'indexTicket']);
+
+
