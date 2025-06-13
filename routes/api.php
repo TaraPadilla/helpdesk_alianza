@@ -18,6 +18,9 @@ use App\Http\Controllers\RepuestosUsadosController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\ImagenTicketController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Http\Request;
 
 Route::get('/conexion-test', function () {
     try {
@@ -34,10 +37,18 @@ Route::get('/cors-test', function () {
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(['status' => 'API OK']);
 });
 
-// Product Catalog Routes
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('perfil', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::apiResource('usuarios', UsuarioController::class);
+
+    // Product Catalog Routes
 Route::prefix('catalogo')->group(function () {
     Route::resource('lineas', LineaController::class);  
     Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);  
@@ -48,6 +59,9 @@ Route::prefix('catalogo')->group(function () {
         'origenes' => 'origen'
     ]);
 });
+});
+
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
 // Gestion Clientes Routes
 Route::prefix('gestion')->group(function () {
