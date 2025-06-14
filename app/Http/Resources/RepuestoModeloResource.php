@@ -4,15 +4,15 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RepuestosUsadosResource extends JsonResource
+class RepuestoModeloResource extends JsonResource
 {
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'soporte_id' => $this->soporte_id,
+            'modelo_id' => $this->modelo_id,
             'repuesto_id' => $this->repuesto_id,
-            'numero_factura_repuesto' => $this->numero_factura_repuesto,
+            'modelo' => new ModeloResource($this->whenLoaded('modelo')),
             'repuesto' => new RepuestoResource($this->whenLoaded('repuesto')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
