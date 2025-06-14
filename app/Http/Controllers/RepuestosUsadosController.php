@@ -6,6 +6,8 @@ use App\Models\RepuestosUsados;
 use App\Http\Resources\RepuestosUsadosResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Models\Soporte;
+use App\Models\Repuesto;
 
 class RepuestosUsadosController extends Controller
 {
@@ -24,12 +26,12 @@ class RepuestosUsadosController extends Controller
             
             $validated = $request->validate([
                 'soporte_id' => 'required|exists:soportes,id',
-                'codigo_repuesto' => 'required|exists:repuestos,codigo',
+                'repuesto_id' => 'required|exists:repuestos,id',
                 'numero_factura_repuesto' => 'nullable|string|max:100',
             ]);
 
             $repuestosUsados = RepuestosUsados::create($validated);
-            return new RepuestosUsadosResource($repuestosUsados);
+            return new RepuestosUsadosResource($repuestosUsados->loadMissing(['soporte', 'repuesto']));
         } catch (\Exception $e) {
             Log::error('Error creating repuestosUsados', ['error' => $e->getMessage()]);
             throw $e;
@@ -67,7 +69,9 @@ class RepuestosUsadosController extends Controller
     public function repuestosUsadosPorSoporte(Soporte $soporte)
     {
         return RepuestosUsadosResource::collection(
-            $soporte->repuestosUsados()->with('repuesto')->get()
+            RepuestosUsados::where('soporte_id', $soporte->id)
+                ->with('repuesto')
+                ->get()
         );
     }
 

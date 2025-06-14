@@ -25,7 +25,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RepuestoModeloController;
 
 
-
 Route::get('/conexion-test', function () {
     try {
         DB::connection()->getPdo();
@@ -101,15 +100,10 @@ Route::prefix('tecnico')->group(function () {
     Route::resource('tecnicos', TecnicoController::class);
     Route::resource('soportes', SoporteController::class);
     Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
-});
-
-// Usuarios API Resource
-Route::apiResource('usuarios', UsuarioController::class);
-
-// Repuestos Routes
-Route::prefix('repuestos')->group(function () {
-    Route::get('buscar', [RepuestoController::class, 'filterByName'])->name('repuestos.buscar');
     Route::resource('repuestos', RepuestoController::class);
+    //Repuesto por soporte
+    Route::get('repuestos-usados/soporte/{soporte}', 
+              [RepuestosUsadosController::class, 'repuestosUsadosPorSoporte'])->name('repuestos-usados.soporte');
     Route::resource('repuestos-usados', RepuestosUsadosController::class)->parameters([
         'repuestos-usados' => 'repuestosUsados'
     ]);
@@ -120,6 +114,8 @@ Route::prefix('repuestos')->group(function () {
 
 // Usuarios API Resource
 Route::apiResource('usuarios', UsuarioController::class);
+
+// Usuarios API Resource
 Route::resource('encuestas', EncuestaController::class);
 
 // Encuestas Routes

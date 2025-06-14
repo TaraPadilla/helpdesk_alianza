@@ -22,7 +22,8 @@ class SoporteResource extends JsonResource
             'descripcion_dano' => $this->descripcion_dano,
             'descripcion_reparacion' => $this->descripcion_reparacion,
             'parte_afectada' => $this->parte_afectada,
-            'orden_trabajo' => $this->orden_trabajo
+            'orden_trabajo' => $this->orden_trabajo,
+            'repuestos_usados' => RepuestosUsadosResource::collection($this->whenLoaded('repuestosUsados'))
         ];
     }
 }

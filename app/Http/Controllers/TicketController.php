@@ -112,6 +112,7 @@ class TicketController extends Controller
                 'modeloAdquirido.modelo.producto.linea',
                 'modeloAdquirido.modelo.origen',
                 'soportes.tecnico.taller',
+                'soportes.repuestosUsados.repuesto',
                 'pagos',
                 'encuestas'
             ]);
