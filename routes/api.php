@@ -41,20 +41,37 @@ Route::get('/cors-test', function () {
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(['status' => 'API OK']);
 });
 
-// Product Catalog Routes
-Route::prefix('catalogo')->group(function () {
-    Route::resource('lineas', LineaController::class);
-    Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);
-    Route::resource('productos', ProductoController::class);
-    Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
-    Route::resource('modelos', ModeloController::class);
-    Route::resource('origenes', OrigenController::class)->parameters([
-        'origenes' => 'origen'
-    ]);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('perfil', function (Request $request) {
+        return response()->json([
+            'data' => $request->user()
+        ]);
+    });
+
+    Route::apiResource('usuarios', UsuarioController::class);
+
+    // Product Catalog Routes
+    Route::prefix('catalogo')->group(function () {
+        Route::resource('lineas', LineaController::class);
+        Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);
+        Route::resource('productos', ProductoController::class);
+        Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
+        Route::resource('modelos', ModeloController::class);
+        Route::resource('origenes', OrigenController::class)->parameters([
+            'origenes' => 'origen'
+        ]);
+    });
 });
+
+Route::post('login', [AuthController::class, 'login'])->name('login');
+
+// Dashboard Routes
+Route::get('/dashboard/resumen', [DashboardController::class, 'resumen']);
+
 
 // Gestion Clientes Routes
 Route::prefix('gestion')->group(function () {
@@ -68,6 +85,7 @@ Route::prefix('gestion')->group(function () {
 
 // Tickets Routes
 Route::prefix('helpdesk')->group(function () {
+    Route::get('/tickets/{ticket}/pdf', [TicketController::class, 'generarPDF']);
     Route::resource('tickets', TicketController::class);
     Route::resource('modelos-adquiridos', ModeloAdquiridoController::class)
     ->parameters([
@@ -83,6 +101,14 @@ Route::prefix('tecnico')->group(function () {
     Route::resource('tecnicos', TecnicoController::class);
     Route::resource('soportes', SoporteController::class);
     Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
+});
+
+// Usuarios API Resource
+Route::apiResource('usuarios', UsuarioController::class);
+
+// Repuestos Routes
+Route::prefix('repuestos')->group(function () {
+    Route::get('buscar', [RepuestoController::class, 'filterByName'])->name('repuestos.buscar');
     Route::resource('repuestos', RepuestoController::class);
     Route::resource('repuestos-usados', RepuestosUsadosController::class)->parameters([
         'repuestos-usados' => 'repuestosUsados'
