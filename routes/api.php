@@ -21,6 +21,7 @@ use App\Http\Controllers\ImagenTicketController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/conexion-test', function () {
     try {
@@ -64,6 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
+
+// Dashboard Routes
+Route::get('/dashboard/resumen', [DashboardController::class, 'resumen']);
+
 
 // Gestion Clientes Routes
 Route::prefix('gestion')->group(function () {

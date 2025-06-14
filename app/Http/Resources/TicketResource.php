@@ -34,6 +34,10 @@ class TicketResource extends JsonResource
                             'id' => $this->modeloAdquirido->modelo->producto->linea->id,
                             'nombre' => $this->modeloAdquirido->modelo->producto->linea->nombre
                         ]
+                    ],
+                    'origen' => [
+                        'id' => $this->modeloAdquirido->modelo->origen->id,
+                        'nombre' => $this->modeloAdquirido->modelo->origen->nombre
                     ]
                 ],
                 'cliente' => [
@@ -62,7 +66,7 @@ class TicketResource extends JsonResource
             'pagos' => PagoResource::collection($this->pagos),
             'encuestas' => EncuestaResource::collection($this->encuestas),
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->updated_at,  
         ];
     }
 }
