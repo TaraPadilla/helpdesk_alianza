@@ -26,6 +26,7 @@ class TicketController extends Controller
             Log::info('store Ticket', ['request' => $request->all()]);
             $validated = $request->validate([
             'modelo_adquirido_id' => 'required|exists:modelos_adquiridos,id',
+            'codigo' => 'required|string|max:30',
             'fecha_reporte' => 'required|date',
             'status' => 'required|string',
             'resultado' => 'nullable|string',
@@ -61,6 +62,7 @@ class TicketController extends Controller
         Log::info('update Ticket', ['ticket' => $ticket]);
         $validated = $request->validate([
             'modelo_adquirido_id' => 'sometimes|required|exists:modelos_adquiridos,id',
+            'codigo' => 'sometimes|required|string|max:30',
             'fecha_reporte' => 'sometimes|required|date',
             'status' => 'sometimes|required|string',
             'resultado' => 'nullable|string',

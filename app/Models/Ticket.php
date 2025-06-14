@@ -13,6 +13,7 @@ class Ticket extends Model
     protected $table = 'tickets';
     protected $fillable = [
         'modelo_adquirido_id',
+        'codigo',
         'fecha_reporte',
         'status',
         'danio_reportado_cliente',
