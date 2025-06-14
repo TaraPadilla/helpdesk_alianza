@@ -48,9 +48,7 @@ class ImagenTicketController extends Controller
             foreach ($imagenes as $i => $imagen) {
                 $nombreArchivo = uniqid('ticket_') . '.' . $imagen->getClientOriginalExtension();
                 $destino = storage_path("app/public/tickets/" . $nombreArchivo);
-                // Log::info("Moviendo archivo a: " . $destino);
-                // $imagen->move(storage_path('app/public/tickets'), $nombreArchivo);
-                                
+
                 $rutaStorage = $imagen->storeAs('public/tickets', $nombreArchivo);
                 $rutaPublica = '/storage/tickets/' . $nombreArchivo;
                 Log::info("Nombre archivo: " . $nombreArchivo);

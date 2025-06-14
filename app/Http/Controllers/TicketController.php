@@ -103,4 +103,35 @@ class TicketController extends Controller
     {
         return TicketResource::collection($modeloAdquirido->tickets()->get());
     }
+
+    public function generarPDF(Ticket $ticket)
+    {
+        try {
+            $ticket->load([
+                'modeloAdquirido.cliente',
+                'modeloAdquirido.modelo.producto.linea',
+                'modeloAdquirido.modelo.origen',
+                'soportes.tecnico.taller',
+                'pagos',
+                'encuestas'
+            ]);
+
+            return response()->json([
+                'data' => new TicketResource($ticket)
+            ]);
+            
+        } catch (\Throwable $e) {
+            \Log::error('Error al generar reporte del ticket', [
+                'ticket_id' => $ticket->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'message' => 'Error al generar el reporte',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 }
