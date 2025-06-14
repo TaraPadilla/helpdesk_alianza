@@ -137,4 +137,16 @@ class TicketController extends Controller
         }
     }
 
+    /**
+     * Retorna el máximo id en la tabla tickets.
+     */
+    public function maxId()
+    {
+        $maxId = Ticket::max('id');
+
+        return response()->json([
+            'data' => $maxId
+        ]);
+    }
+
 }

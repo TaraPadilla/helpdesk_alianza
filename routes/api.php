@@ -24,7 +24,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RepuestoModeloController;
 
-
 Route::get('/conexion-test', function () {
     try {
         DB::connection()->getPdo();
@@ -84,6 +83,7 @@ Route::prefix('gestion')->group(function () {
 
 // Tickets Routes
 Route::prefix('helpdesk')->group(function () {
+    Route::get('/tickets/max-id', [TicketController::class, 'maxId']);
     Route::get('/tickets/{ticket}/pdf', [TicketController::class, 'generarPDF']);
     Route::resource('tickets', TicketController::class);
     Route::resource('modelos-adquiridos', ModeloAdquiridoController::class)

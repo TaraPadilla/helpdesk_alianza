@@ -47,7 +47,8 @@ class TicketResource extends JsonResource
                     'documento' => $this->modeloAdquirido->cliente->documento,
                     'email' => $this->modeloAdquirido->cliente->email,
                     'telefono' => $this->modeloAdquirido->cliente->telefono,
-                    'direccion' => $this->modeloAdquirido->cliente->direccion
+                    'direccion' => $this->modeloAdquirido->cliente->direccion,
+                    'categoria' => $this->modeloAdquirido->cliente->categoria   
                 ],
                 'fecha_compra' => $this->modeloAdquirido->fecha_compra,
                 'numero_factura' => $this->modeloAdquirido->numero_factura,

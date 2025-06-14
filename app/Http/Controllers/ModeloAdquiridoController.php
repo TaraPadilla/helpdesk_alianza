@@ -26,9 +26,9 @@ class ModeloAdquiridoController extends Controller
             $validated = $request->validate([
                 'cliente_id' => 'required|exists:clientes,id',
                 'modelo_id' => 'required|exists:modelos,id',
-                'numero_serie' => 'required|string|max:255|unique:modelos_adquiridos',
-                'fecha_compra' => 'required|date',
-                'numero_factura' => 'required|string|max:255',
+                'numero_serie' => 'nullable|string|max:255|unique:modelos_adquiridos',
+                'fecha_compra' => 'nullable|date',
+                'numero_factura' => 'nullable|string|max:255',
             ]);
     
             Log::debug('Datos validados', $validated);
