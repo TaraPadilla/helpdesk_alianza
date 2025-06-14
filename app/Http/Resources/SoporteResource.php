@@ -23,6 +23,7 @@ class SoporteResource extends JsonResource
             'descripcion_reparacion' => $this->descripcion_reparacion,
             'parte_afectada' => $this->parte_afectada,
             'orden_trabajo' => $this->orden_trabajo,
+            'resultado' => $this->resultado,
             'repuestos_usados' => RepuestosUsadosResource::collection($this->whenLoaded('repuestosUsados'))
         ];
     }

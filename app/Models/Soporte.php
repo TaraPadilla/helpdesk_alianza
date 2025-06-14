@@ -31,7 +31,8 @@ class Soporte extends Model
         'descripcion_dano',
         'descripcion_reparacion',
         'parte_afectada',
-        'orden_trabajo'
+        'orden_trabajo',
+        'resultado'
     ];
 
     protected $casts = [

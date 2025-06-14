@@ -32,6 +32,7 @@ class SoporteController extends Controller
                 'descripcion_reparacion' => 'nullable|string',
                 'parte_afectada' => 'nullable|string|max:100',
                 'orden_trabajo' => 'nullable|string|max:100',
+                'resultado' => 'nullable|string|max:100',
             ]);
 
             $soporte = Soporte::create($validated);
@@ -58,6 +59,7 @@ class SoporteController extends Controller
                 'descripcion_reparacion' => 'sometimes|nullable|string',
                 'parte_afectada' => 'sometimes|nullable|string|max:100',
                 'orden_trabajo' => 'sometimes|nullable|string|max:100',
+                'resultado' => 'sometimes|nullable|string|max:100',
             ]);
 
             $soporte->update($validated);
