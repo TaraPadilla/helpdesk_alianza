@@ -19,14 +19,16 @@ class Repuesto extends Model
     use SoftDeletes;
 
     protected $table = 'repuestos';
-    
+
     protected $fillable = [
-        'codigo',
-        'nombre',
-        'tipo'
+        'cod_interno',
+        'descripcion',
+        'codigo_proveedor',
     ];
 
     protected $casts = [
-        'deleted_at' => 'datetime'
+        'deleted_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }

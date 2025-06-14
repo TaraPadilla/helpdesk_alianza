@@ -22,8 +22,8 @@ class RepuestosUsados extends Model
     
     protected $fillable = [
         'soporte_id',
-        'codigo_repuesto',
-        'numero_factura_repuesto'
+        'repuesto_id',
+        'numero_factura_repuesto',
     ];
 
     protected $casts = [
@@ -37,6 +37,6 @@ class RepuestosUsados extends Model
 
     public function repuesto()
     {
-        return $this->belongsTo(Repuesto::class, 'codigo_repuesto', 'codigo');
+        return $this->belongsTo(Repuesto::class, 'repuesto_id');
     }
 }

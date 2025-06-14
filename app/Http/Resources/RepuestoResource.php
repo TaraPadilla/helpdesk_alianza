@@ -16,9 +16,9 @@ class RepuestoResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'codigo' => $this->codigo,
-            'nombre' => $this->nombre,
-            'tipo' => $this->tipo,
+            'cod_interno' => $this->cod_interno,
+            'descripcion' => $this->descripcion,
+            'codigo_proveedor' => $this->codigo_proveedor,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'deleted_at' => $this->deleted_at,
