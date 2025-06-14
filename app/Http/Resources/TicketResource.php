@@ -54,7 +54,7 @@ class TicketResource extends JsonResource
             ],
             'fecha_reporte' => $this->fecha_reporte,
             'status' => $this->status,
-            'resultado' => $this->resultado,
+            
             'danio_reportado_cliente' => $this->danio_reportado_cliente,
             'almacen' => $this->almacen,
             'observaciones' => $this->observaciones,

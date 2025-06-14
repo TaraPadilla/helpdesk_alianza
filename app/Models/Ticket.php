@@ -15,7 +15,6 @@ class Ticket extends Model
         'modelo_adquirido_id',
         'fecha_reporte',
         'status',
-        'resultado',
         'danio_reportado_cliente',
         'almacen',
         'observaciones',
