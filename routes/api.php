@@ -18,6 +18,13 @@ use App\Http\Controllers\RepuestosUsadosController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\EncuestaController;
 use App\Http\Controllers\ImagenTicketController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RepuestoModeloController;
+
+
 
 Route::get('/conexion-test', function () {
     try {
@@ -39,8 +46,8 @@ Route::get('/', function () {
 
 // Product Catalog Routes
 Route::prefix('catalogo')->group(function () {
-    Route::resource('lineas', LineaController::class);  
-    Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);  
+    Route::resource('lineas', LineaController::class);
+    Route::get('productos/linea/{linea}', [ProductoController::class, 'filterByLinea']);
     Route::resource('productos', ProductoController::class);
     Route::get('modelos/producto/{producto}', [ModeloController::class, 'filterByProducto']);
     Route::resource('modelos', ModeloController::class);
@@ -56,7 +63,7 @@ Route::prefix('gestion')->group(function () {
     Route::get('ciudades/provincia/{provincia}', [CiudadController::class, 'ciudadesPorProvincia']);
     Route::resource('ciudades', CiudadController::class)->parameters([
         'ciudades' => 'ciudad'
-    ]);   
+    ]);
 });
 
 // Tickets Routes
@@ -76,23 +83,17 @@ Route::prefix('tecnico')->group(function () {
     Route::resource('tecnicos', TecnicoController::class);
     Route::resource('soportes', SoporteController::class);
     Route::get('soportes/ticket/{ticket}', [SoporteController::class, 'soportePorTicket'])->name('soportes.ticket');
-});
-
-// Repuestos Routes
-Route::prefix('repuestos')->group(function () {
-    Route::get('buscar', [RepuestoController::class, 'filterByName'])->name('repuestos.buscar');
     Route::resource('repuestos', RepuestoController::class);
+    Route::resource('repuestos-usados', RepuestosUsadosController::class)->parameters([
+        'repuestos-usados' => 'repuestosUsados'
+    ]);
+    Route::resource('repuesto-modelos', RepuestoModeloController::class)->parameters([
+        'repuesto-modelos' => 'repuestoModelo'
+    ]);
 });
 
-// RepuestosUsados Routes
-Route::prefix('repuestos-usados')->group(function () {
-    Route::get('soporte/{soporte}', [RepuestosUsadosController::class, 'repuestosUsadosPorSoporte'])
-        ->name('repuestos-usados.soporte');
-    Route::get('repuesto/{repuesto}', [RepuestosUsadosController::class, 'repuestosUsadosPorRepuesto'])
-        ->name('repuestos-usados.repuesto');
-    Route::resource('repuestos-usados', RepuestosUsadosController::class);
-});
-
+// Usuarios API Resource
+Route::apiResource('usuarios', UsuarioController::class);
 Route::resource('encuestas', EncuestaController::class);
 
 // Encuestas Routes
