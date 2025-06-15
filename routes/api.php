@@ -84,6 +84,7 @@ Route::prefix('gestion')->group(function () {
 // Tickets Routes
 Route::prefix('helpdesk')->group(function () {
     Route::get('/tickets/max-id', [TicketController::class, 'maxId']);
+    Route::put('/tickets/{ticket}/status', [TicketController::class, 'actualizarStatus']);
     Route::get('/tickets/{ticket}/pdf', [TicketController::class, 'generarPDF']);
     Route::resource('tickets', TicketController::class);
     Route::resource('modelos-adquiridos', ModeloAdquiridoController::class)

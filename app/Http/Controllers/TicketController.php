@@ -149,4 +149,24 @@ class TicketController extends Controller
         ]);
     }
 
+    /**
+     * Actualiza el status de un ticket.
+     */
+    public function actualizarStatus(Request $request, $id)
+    {
+        Log::info('update Ticket', ['request' => $request->all()]);
+        $validated = $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $ticket = Ticket::findOrFail($id);
+        $ticket->status = $validated['status'];
+        $ticket->save();
+        Log::info('update Ticket', ['ticket' => $ticket]);
+
+        return response()->json([
+            'data' => new TicketResource($ticket)
+        ]);
+    }
+
 }
