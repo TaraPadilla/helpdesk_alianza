@@ -33,6 +33,8 @@ class SoporteController extends Controller
                 'parte_afectada' => 'nullable|string|max:100',
                 'orden_trabajo' => 'nullable|string|max:100',
                 'resultado' => 'nullable|string|max:100',
+                'nueva_factura' => 'nullable|string|max:100',
+                'motivo' => 'nullable|string|max:100',
             ]);
 
             $soporte = Soporte::create($validated);
@@ -60,6 +62,8 @@ class SoporteController extends Controller
                 'parte_afectada' => 'sometimes|nullable|string|max:100',
                 'orden_trabajo' => 'sometimes|nullable|string|max:100',
                 'resultado' => 'sometimes|nullable|string|max:100',
+                'nueva_factura' => 'sometimes|nullable|string|max:100',
+                'motivo' => 'sometimes|nullable|string|max:100',
             ]);
 
             $soporte->update($validated);
