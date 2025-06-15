@@ -61,9 +61,9 @@ class ModeloAdquiridoController extends Controller
         $validated = $request->validate([
             'cliente_id' => 'sometimes|required|exists:clientes,id',
             'modelo_id' => 'sometimes|required|exists:modelos,id',
-            'numero_serie' => 'sometimes|required|string|max:255|unique:modelos_adquiridos,numero_serie,' . $modeloAdquirido->id,
-            'fecha_compra' => 'sometimes|required|date',
-            'numero_factura' => 'sometimes|required|string|max:255',
+            'numero_serie' => 'sometimes|nullable|string|max:255|unique:modelos_adquiridos,numero_serie,' . $modeloAdquirido->id,
+            'fecha_compra' => 'sometimes|nullable|date',
+            'numero_factura' => 'sometimes|nullable|string|max:255',
         ]);
 
         $modeloAdquirido->update($validated);
